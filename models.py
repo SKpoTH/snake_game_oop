@@ -20,6 +20,11 @@ class Snake:
         self.x = x
         self.y = y
 
+        self.body = [(x,y),
+                     (x-Snake.BLOCK_SIZE, y),
+                     (x-2*Snake.BLOCK_SIZE, y)]
+        self.length = 3
+
         self.wait_time = 0
 
         self.direction = DIR_LEFT
