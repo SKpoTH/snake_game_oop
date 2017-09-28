@@ -28,6 +28,10 @@ class Snake:
         self.wait_time = 0
 
         self.direction = DIR_LEFT
+
+    def can_eat(self, heart):
+        if(self.x == heart.x and self.y == heart.y):
+            return True
  
     def update(self, delta):
         self.wait_time += delta
@@ -80,6 +84,9 @@ class World:
  
     def update(self, delta):
         self.snake.update(delta)
+
+        if self.snake.can_eat(self.heart):
+            self.heart.random_position()
     
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.UP:
