@@ -51,13 +51,32 @@ class Snake:
         self.y += self.BLOCK_SIZE * DIR_OFFSET[self.direction][1]
 
         self.wait_time = 0
+
+        self.body = [(self.x,self.y)] + self.body
+        self.body.pop()
+
+class Heart:
+    def __init__(self, world):
+        self.world = world
+        self.x = 0
+        self.y = 0
  
+    def random_position(self):
+        centerx = self.world.width // 2
+        centery = self.world.height // 2
+ 
+        self.x = centerx + randint(-15,15) * Snake.BLOCK_SIZE
+        self.y = centerx + randint(-15,15) * Snake.BLOCK_SIZE
+
 class World:
     def __init__(self, width, height):
         self.width = width
         self.height = height
  
         self.snake = Snake(self, width // 2, height // 2)
+
+        self.heart = Heart(self)
+        self.heart.random_position()
  
     def update(self, delta):
         self.snake.update(delta)
