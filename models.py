@@ -29,6 +29,8 @@ class Snake:
 
         self.direction = DIR_LEFT
 
+        self.has_eaten = False
+
     def can_eat(self, heart):
         if(self.x == heart.x and self.y == heart.y):
             return True
@@ -59,6 +61,10 @@ class Snake:
         self.body = [(self.x,self.y)] + self.body
         self.body.pop()
 
+        if self.has_eaten:
+            self.body = [(self.x,self.y)] + self.body
+            self.has_eaten = False
+
 class Heart:
     def __init__(self, world):
         self.world = world
@@ -87,6 +93,7 @@ class World:
 
         if self.snake.can_eat(self.heart):
             self.heart.random_position()
+            self.snake.has_eaten = True
     
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.UP:
