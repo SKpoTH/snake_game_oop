@@ -38,7 +38,7 @@ class SnakeWindow(arcade.Window):
  
         self.snake_sprite = SnakeSprite(self.world.snake)
 
-        self.heart_sprite = arcade.Sprite('Images/heart.png')
+        self.heart_sprite = ModelSprite('Images/heart.png',model=self.world.heart)
  
     def update(self, delta):
         self.world.update(delta)
